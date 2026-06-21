@@ -1,0 +1,21 @@
+.sidebar {
+  flex: 0 0 auto;
+  width: 250px;
+  background: #E0E3E6;
+  border-right: 1px solid #C4C7CA;
+}
+
+.router-outlet-container {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: auto;
+  padding: 16px 32px;
+}
+
+div.flex {
+  height: 100vh;
+}
+
+.main-container {
+  background-color: #EFF1F4;
+}

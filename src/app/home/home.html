@@ -1,0 +1,49 @@
+<div class="">
+    <h1 class="color-primary">My Accounts</h1>
+    <div class="card primary-account margin-bottom" style="background: white; width: 50%;">
+        <div class="card-header">
+            <h2 class="account-title">Primary Account</h2>
+            <p class="currency"> USD </p>
+        </div>
+
+        <div class="card-body footer">
+            <div>
+                <p class="currency">Available balance</p>
+                <h2 class="balance">$1,500.00</h2>
+            </div>
+            <a class="detail-link" [routerLink]="['/accounts', 3]">Details ></a>
+        </div>
+    </div>
+
+    <div class="accounts-container">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="account-title">Account 1</h2>
+                <p class="currency"> USD </p>
+            </div>
+
+            <div class="card-body footer">
+                <div>
+                    <p class="currency">Available balance</p>
+                    <h2 class="balance">$1,500.00</h2>
+                </div>
+                <a class="detail-link" [routerLink]="['/accounts', 1]">Details ></a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="account-title">Account 2</h2>
+                <p class="currency"> EUR </p>
+            </div>
+
+            <div class="card-body footer">
+                <div>
+                    <p class="currency">Available balance</p>
+                    <h2 class="balance">€5,200.50 </h2>
+                </div>
+                <a class="detail-link" [routerLink]="['/accounts', 2]">Details ></a>
+            </div>
+        </div>
+    </div>
+</div>

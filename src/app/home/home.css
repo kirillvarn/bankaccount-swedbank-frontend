@@ -1,0 +1,47 @@
+.margin-bottom {
+    margin-bottom: 12px;
+}
+
+.accounts-container {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+}
+
+.accounts-container > .card {
+    flex-grow: 1;
+    border-top: 2px solid gray;
+}
+
+.currency, .account-title {
+    margin: 0;
+}
+
+.account-title {
+    padding-top: 16px;
+}
+
+.currency {
+    color: gray;
+}
+
+.detail-link {
+    text-decoration: none;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.balance {
+    margin-top: 0;
+}
+
+.primary-account {
+    border-top: 4px solid var(--color-primary);
+}
