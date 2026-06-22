@@ -1,21 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { AccountService } from '../services/account.service';
+import { CommonModule } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.html',
   styleUrl: './account.css',
-  imports: [RouterLink]
+  imports: [RouterLink, CommonModule]
 })
 export class Account {
-  id!: string | null;
-  accountHolderName: string = "name";
-  currency: string = "USD";
-  accountNumber: string = "1";
-  balance: number = 100;
-  private route = inject(ActivatedRoute);
+  accountService = inject(AccountService);
 
-  ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-  }
+  accountId = inject(ActivatedRoute).snapshot.paramMap.get('id')!;
+  account = this.accountService.getAccount(this.accountId);
+
+  transactions$ = this.accountService.getTransactions(this.accountId);
+  transactions = toSignal(this.transactions$, { initialValue: [] });
 }

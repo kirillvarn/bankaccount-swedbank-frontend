@@ -1,41 +1,35 @@
 <div class="">
     <h1 class="color-primary">My Accounts</h1>
 
-    @if (primary_account !== undefined) {
-    <div class="card primary-account margin-bottom" style="background: white; width: 50%;">
+    <div *ngIf="primaryAccount() as primaryAccount" class="card primary-account margin-bottom" style="background: white; width: 50%;">
         <div class="card-header">
-            <h2 class="account-title">{{ primary_account.name }}</h2>
-            <p class="currency"> {{ primary_account.currency }} </p>
+            <h2 class="account-title">{{ primaryAccount.name }}</h2>
+            <p class="currency"> {{ primaryAccount.currency }} </p>
         </div>
 
         <div class="card-body footer">
             <div>
                 <p class="currency">Available balance</p>
-                <h2 class="balance"> {{ getDisplayBalance(primary_account) }}</h2>
+                <h2 class="balance"> {{ getDisplayBalance(primaryAccount) }}</h2>
             </div>
-            <a class="detail-link" [routerLink]="['/accounts', 3]">Details ></a>
+            <a class="detail-link" [routerLink]="['/accounts', primaryAccount.id]">Details ></a>
         </div>
     </div>
-    }
 
-    @if (accounts.length) {
-        <div class="accounts-container">
-            @for (account of accounts; track $index) {
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="account-title"> {{ account.name }} </h2>
-                    <p class="currency"> {{ account.currency }} </p>
-                </div>
-
-                <div class="card-body footer">
-                    <div>
-                        <p class="currency">Available balance</p>
-                        <h2 class="balance">{{ getDisplayBalance(account) }} </h2>
-                    </div>
-                    <a class="detail-link" [routerLink]="['/accounts', 1]">Details ></a>
-                </div>
+    <div *ngFor="let account of otherAccounts()" class="accounts-container">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="account-title"> {{ account.name }} </h2>
+                <p class="currency"> {{ account.currency }} </p>
             </div>
-            }
+
+            <div class="card-body footer">
+                <div>
+                    <p class="currency">Available balance</p>
+                    <h2 class="balance">{{ getDisplayBalance(account) }} </h2>
+                </div>
+                <a class="detail-link" [routerLink]="['/accounts', account.id]">Details ></a>
+            </div>
         </div>
-    }
+    </div>
 </div>
