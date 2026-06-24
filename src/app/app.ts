@@ -6,7 +6,7 @@ import { Sidebar } from './sidebar/sidebar';
   selector: 'app-root',
   imports: [RouterOutlet, Sidebar],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('swed-frontend');

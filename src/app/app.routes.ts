@@ -15,7 +15,7 @@ export const routes: Routes = [
         title: 'Account Overview',
     },
     {
-        path: 'transaction',
+        path: 'transactions/:id',
         component: Transaction,
         title: 'Transaction Overview',
     }

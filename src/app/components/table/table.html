@@ -1,0 +1,21 @@
+<div *ngIf="data.length > 0">
+    <table>
+        <thead>
+            <tr>
+                <th *ngFor="let column of columns">{{ column }}</th>
+                <th *ngIf="showDetails"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of rows()">
+                <td *ngFor="let column of columns">
+                    {{ row[column] }}
+                </td>
+
+                <td *ngIf="showDetails">
+                    <a [routerLink]="['/transactions', row['id']]" class="detail-link"> Details > </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

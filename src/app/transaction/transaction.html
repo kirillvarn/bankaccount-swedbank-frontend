@@ -1,3 +1,18 @@
-<div>
-    Transaction
+<div style="margin-bottom: 12px;">
+    <button navigateBack class="primary">
+        < Back
+    </button>
+</div>
+
+<div *ngIf="transaction() as transaction" class="card">
+    <div class="card-header">
+        <h2 class="color-primary"> Transaction overview </h2>
+    </div>
+    <hr>
+    <div class="card-body">
+        <div> Amount: {{ transaction.amount }} </div>
+        <div> Transaction type: {{ transaction.transactionType }} </div>
+        <div> Balance before: {{ transaction.balanceBefore }} </div>
+        <div> Balance after: {{ transaction.balanceAfter }} </div>
+    </div>
 </div>

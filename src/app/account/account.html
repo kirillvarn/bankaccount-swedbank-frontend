@@ -1,6 +1,6 @@
 <div *ngIf="account() as account" class="account-container">
     <div>
-        <button routerLink="/" class="primary">
+        <button navigateBack class="primary">
             < Back </button>
     </div>
 
@@ -17,17 +17,8 @@
             <h3>Transaction history</h3>
         </div>
 
-        <div *ngFor="let transaction of transactions">
-            <div>
-                {{ transaction.amount }}
-            </div>
-            <div>
-                {{ transaction.transactionType }}
-            </div>
-            <div>
-                {{ transaction.currency }}
-            </div>
-        </div>
+        <app-table [data]="transactions"
+            [columns]="['currency', 'transactionType', 'amount', 'balanceBefore', 'balanceAfter']" [showDetails]="true"/>
 
         <hr>
     </div>

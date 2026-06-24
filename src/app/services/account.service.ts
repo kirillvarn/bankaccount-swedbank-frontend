@@ -14,7 +14,8 @@ export class AccountService {
   private http = inject(HttpClient);
 
   getTransactions(accountId: string) {
-    return this.http.get<any[]>(`${this.apiUrl}/${accountId}/transactions`);
+    const result = this.http.get<any[]>(`${this.apiUrl}/${accountId}/transactions`);
+    return result;
   }
 
   setAccounts(list: Account[]) {
