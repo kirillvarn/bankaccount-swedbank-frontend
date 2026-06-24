@@ -1,14 +1,21 @@
 <div *ngIf="account() as account" class="account-container">
     <div>
         <button navigateBack class="primary">
-            < Back </button>
+            < Back
+        </button>
     </div>
 
     <div class="account-header" style="margin-bottom: 16px;">
         <h1> {{ account.name }} </h1>
         <div class="flex flex-column">
-            <h1 class="color-primary" style="margin-bottom: 0;"> CUR: {{ account.balance }} </h1>
+            <h1 class="color-primary" style="margin-bottom: 0;"> {{ getDisplayBalance(account) }} </h1>
             <span class="text-muted"> Available balance</span>
+        </div>
+    </div>
+
+    <div *ngIf="chartData() as chartData" style="margin-bottom: 12px;">
+        <div *ngIf="chartData.length > 0" class="card" style="height: 400px;">
+            <app-line-chart [chartData]="chartData"/>
         </div>
     </div>
 
@@ -18,8 +25,7 @@
         </div>
 
         <app-table [data]="transactions"
-            [columns]="['currency', 'transactionType', 'amount', 'balanceBefore', 'balanceAfter']" [showDetails]="true"/>
+            [columns]="['transactionType', 'amount', 'balanceBefore', 'balanceAfter']" [showDetails]="true"/>
 
-        <hr>
     </div>
 </div>

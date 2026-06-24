@@ -40,7 +40,7 @@ RSRKg+wCDVTmINhUeedBuQA=
 `;
     const key = await importPKCS8(privateKeyPem, 'RS256');
 
-    this.cached = await new SignJWT({ user_id: "549f637c-767f-481f-b303-7f9e91384a31" })
+    this.cached = await new SignJWT({ user_id: "e9646f5f-29a8-43a7-9e2c-87a36542857c" })
       .setProtectedHeader({ alg: 'RS256' })
       .setIssuedAt()
       .setExpirationTime('1h')

@@ -13,7 +13,7 @@ const CURRENCY_SYMBOLS: Record<string, string> = {
     providedIn: 'root'
 })
 export default class CurrencyFormatService {
-    getFormattedBalance(acc: Account): string {
+    getFormattedBalance(acc: AccountModel): string {
         const currencySymbol = this.get_currency(acc.currency);
 
         return `${currencySymbol} ${acc.balance}`;

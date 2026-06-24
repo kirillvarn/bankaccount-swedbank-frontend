@@ -9,7 +9,7 @@ const BASE = "http://localhost:8080/api/v1"
 })
 export class AccountService {
   private readonly apiUrl = `${BASE}/accounts`;
-  private accounts = signal<Account[]>([]);
+  private accounts = signal<AccountModel[]>([]);
 
   private http = inject(HttpClient);
 
@@ -18,15 +18,15 @@ export class AccountService {
     return result;
   }
 
-  setAccounts(list: Account[]) {
+  setAccounts(list: AccountModel[]) {
     this.accounts.set(list);
   }
 
   getAccount(id: string) {
-    const remote = signal<Account | null>(null);
+    const remote = signal<AccountModel | null>(null);
 
     if (this.accounts().length == 0) {
-      this.http.get<Account>(`${this.apiUrl}/${id}`).pipe(
+      this.http.get<AccountModel>(`${this.apiUrl}/${id}`).pipe(
         tap(acc => remote.set(acc))
       ).subscribe();
 
@@ -36,7 +36,7 @@ export class AccountService {
     return computed(() => this.accounts().find(a => a.id === id) ?? null);
   }
 
-  getAccounts(): Observable<Account[]> {
-    return this.http.get<Account[]>(this.apiUrl);
+  getAccounts(): Observable<AccountModel[]> {
+    return this.http.get<AccountModel[]>(this.apiUrl);
   }
 }

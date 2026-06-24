@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { TransactionService } from '../services/transaction.service';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -15,5 +15,5 @@ export class Transaction {
   transactionId = inject(ActivatedRoute).snapshot.paramMap.get('id')!;
 
   transaction$ = this.transactionService.getTransaction(this.transactionId);
-  transaction = toSignal(this.transaction$, { initialValue: [] });
+  transaction = toSignal(this.transaction$);
 }

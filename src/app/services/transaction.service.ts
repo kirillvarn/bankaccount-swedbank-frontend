@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
-import { inject, Injectable, signal } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
 const BASE = "http://localhost:8080/api/v1"
 
@@ -12,7 +13,7 @@ export class TransactionService {
 
     private http = inject(HttpClient);
 
-    getTransaction(id: string) {
-        return this.http.get<any>(`${this.apiUrl}/${id}`);
+    getTransaction(id: string): Observable<TransactionModel> {
+        return this.http.get<TransactionModel>(`${this.apiUrl}/${id}`);
     }
 }

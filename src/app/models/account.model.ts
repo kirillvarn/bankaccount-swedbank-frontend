@@ -1,4 +1,4 @@
-interface Account {
+interface AccountModel {
   id: string,
   currency: string;
   isPrimary: boolean;

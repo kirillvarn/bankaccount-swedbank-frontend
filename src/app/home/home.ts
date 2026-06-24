@@ -17,7 +17,7 @@ export class Home {
 
   accounts$ = this.accountService.getAccounts();
 
-  accounts = toSignal(this.accounts$, { initialValue: [] as Account[] });
+  accounts = toSignal(this.accounts$, { initialValue: [] as AccountModel[] });
 
   primaryAccount = computed(() =>
     this.accounts().find(a => a.isPrimary) ?? null
@@ -31,7 +31,7 @@ export class Home {
     this.accounts$.subscribe(list => this.accountService.setAccounts(list));
   }
 
-  getDisplayBalance(acc: Account): string {
+  getDisplayBalance(acc: AccountModel): string {
     return this.currencyFormatterService.getFormattedBalance(acc);
   }
 }
