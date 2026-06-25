@@ -5,8 +5,9 @@
 </div>
 
 <div *ngIf="transaction() as transaction" class="card">
-    <div class="card-header">
+    <div class="card-header flex" style="align-items: center; justify-content: space-between;">
         <h2 class="color-primary"> Transaction overview </h2>
+        <button (click)="generateReport()"> Generate report </button>
     </div>
     <hr>
     <div class="card-body">

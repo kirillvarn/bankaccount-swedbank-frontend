@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, Input, Signal } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import ListUtil from '../../utils/util.array';
 import { RouterLink } from '@angular/router';
 
@@ -14,11 +14,11 @@ export class Table {
     @Input() columns: string[] = [];
     @Input() showDetails: boolean = false;
 
-    rows: Signal<any[]> = computed(() => {
+    get rows() {
         if (this.data.length > 0) {
-            return this.data.map((el) => ListUtil.pickKeys(el, this.columns));
+            return this.data.map((el) => ListUtil.pickKeys(el as Record<string, any>, this.columns));
         }
 
         return [];
-    });
+    };
 }

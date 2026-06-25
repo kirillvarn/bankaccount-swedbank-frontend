@@ -1,0 +1,13 @@
+<div class="login-wrap">
+    <div class="card">
+        <h1>Login</h1>
+        <p class="subtitle">Sign in to continue</p>
+
+        <label for="userName">User name</label>
+        <input id="userName" type="text" [(ngModel)]="userName" placeholder="Enter user name" />
+
+        <button (click)="login()">Login</button>
+
+        <p class="hint" *ngIf="error">{{ error }}</p>
+    </div>
+</div>

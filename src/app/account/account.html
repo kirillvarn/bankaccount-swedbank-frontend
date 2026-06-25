@@ -1,8 +1,7 @@
 <div *ngIf="account() as account" class="account-container">
     <div>
         <button navigateBack class="primary">
-            < Back
-        </button>
+            < Back </button>
     </div>
 
     <div class="account-header" style="margin-bottom: 16px;">
@@ -15,7 +14,7 @@
 
     <div *ngIf="chartData() as chartData" style="margin-bottom: 12px;">
         <div *ngIf="chartData.length > 0" class="card" style="height: 400px;">
-            <app-line-chart [chartData]="chartData"/>
+            <app-line-chart [chartData]="chartData" />
         </div>
     </div>
 
@@ -24,8 +23,13 @@
             <h3>Transaction history</h3>
         </div>
 
-        <app-table [data]="transactions"
-            [columns]="['transactionType', 'amount', 'balanceBefore', 'balanceAfter']" [showDetails]="true"/>
+        <app-table [data]="transactions" [columns]="['transactionType', 'amount', 'balanceBefore', 'balanceAfter']"
+            [showDetails]="true" />
+    </div>
 
+    <div class="flex" style="justify-content: center; margin-top: 12px;">
+        <button (click)="loadMore()">
+            Load more
+        </button>
     </div>
 </div>

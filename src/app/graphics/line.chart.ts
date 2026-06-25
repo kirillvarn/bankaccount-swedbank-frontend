@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import * as d3 from "d3";
 
 type ChartPoint = {
@@ -11,7 +10,7 @@ type ChartPoint = {
 @Component({
     selector: 'app-line-chart',
     template: '<div class="chart"></div>',
-    imports: [RouterLink, CommonModule]
+    imports: [CommonModule]
 })
 export class LineChart {
     @Input() chartData: any[] = [];

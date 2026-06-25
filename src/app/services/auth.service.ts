@@ -1,15 +1,7 @@
-// auth.service.ts
 import { Injectable } from '@angular/core';
 import { SignJWT, importPKCS8 } from 'jose';
 
-@Injectable({ providedIn: 'root' })
-export class AuthService {
-  private cached?: string;
-
-  async getJwt(): Promise<string> {
-    if (this.cached) return this.cached;
-
-    const privateKeyPem = `-----BEGIN PRIVATE KEY-----
+const PRIVATE_KEY = `-----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDAjt2xX6oYghSc
 ZlBOfjzvRKUIjqMVjVtSsq6RGgK2BBvS6qhAdC8Fj2dNEQozKaLx2phZJHF5Azt/
 K+wKfCTeEHk7wuXSD0vjxfgw/yYr513gRJrxP5Aznh7dY1YjUV8jBf419Tv8L5F/
@@ -36,11 +28,22 @@ dVO/uLm0jfF1j5He6aibJhlR2xjFx6nbBq40OBUHAoGAboAmTaxqYEKKxIy4t4X8
 xN0qDpJo9z0r5A7/d0e0Xw5Ecc/KvBylSW7/glHxF1OUj0KIlzIU8aBh+ZvEDgfy
 CCI6As8DvHbxjNZgTxEYssRFkTQoxYFCxPcfrZdyTjPwoIvFCceQtdYQO3HXN2ny
 RSRKg+wCDVTmINhUeedBuQA=
------END PRIVATE KEY-----
-`;
-    const key = await importPKCS8(privateKeyPem, 'RS256');
+-----END PRIVATE KEY-----`;
 
-    this.cached = await new SignJWT({ user_id: "e9646f5f-29a8-43a7-9e2c-87a36542857c" })
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  private cached?: string;
+
+  clearCache() {
+    this.cached = undefined;
+  }
+
+  async getJwt(user_id: string): Promise<string> {
+    if (this.cached) return this.cached;
+
+    const key = await importPKCS8(PRIVATE_KEY, 'RS256');
+
+    this.cached = await new SignJWT({ user_id: user_id })
       .setProtectedHeader({ alg: 'RS256' })
       .setIssuedAt()
       .setExpirationTime('1h')

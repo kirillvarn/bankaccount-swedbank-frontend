@@ -1,5 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
 const BASE = "http://localhost:8080/api/v1"
@@ -10,17 +10,28 @@ const BASE = "http://localhost:8080/api/v1"
 export class AccountService {
   private readonly apiUrl = `${BASE}/accounts`;
   private accounts = signal<AccountModel[]>([]);
+  readonly accountsSignal = this.accounts.asReadonly();
 
   private http = inject(HttpClient);
 
-  getTransactions(accountId: string) {
-    const result = this.http.get<any[]>(`${this.apiUrl}/${accountId}/transactions`);
+  getTransactions(accountId: string, page: number, limit: number = 10) {
+    const params = new HttpParams()
+      .set('page', page)
+      .set('limit', limit);
+
+    const result = this.http.get<TransactionModel[]>(`${this.apiUrl}/${accountId}/transactions`, { params });
     return result;
   }
 
-  setAccounts(list: AccountModel[]) {
-    this.accounts.set(list);
+  loadAccounts() {
+    this.http.get<AccountModel[]>(this.apiUrl)
+      .subscribe(accounts => this.accounts.set(accounts));
   }
+
+  addAccount(account: AccountModel) {
+    this.accounts.update(accounts => [...accounts, account]);
+  }
+
 
   getAccount(id: string) {
     const remote = signal<AccountModel | null>(null);
@@ -36,7 +47,7 @@ export class AccountService {
     return computed(() => this.accounts().find(a => a.id === id) ?? null);
   }
 
-  getAccounts(): Observable<AccountModel[]> {
-    return this.http.get<AccountModel[]>(this.apiUrl);
+  createAccount(account: AccountFormModel): Observable<AccountModel> {
+    return this.http.post<AccountModel>(this.apiUrl, account);
   }
 }

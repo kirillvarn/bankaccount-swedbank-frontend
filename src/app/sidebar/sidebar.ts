@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,5 +9,12 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink]
 })
 export class Sidebar {
-  
+  router = inject(Router);
+  authService = inject(AuthService);
+
+  logout() {
+    localStorage.removeItem('userName');
+    this.authService.clearCache();
+    this.router.navigate(['/login']);
+  }
 }

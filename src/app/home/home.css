@@ -2,6 +2,11 @@
     margin-bottom: 12px;
 }
 
+.margin-top {
+    margin-top: 12px;
+}
+
+
 .accounts-container {
     width: 100%;
     display: flex;
@@ -38,4 +43,28 @@
 
 .primary-account {
     border-top: 4px solid var(--color-primary);
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  font-size: 1rem;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #3b82f6;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+input::placeholder {
+  color: #94a3b8;
 }

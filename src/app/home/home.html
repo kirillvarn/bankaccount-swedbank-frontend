@@ -1,7 +1,38 @@
 <div class="">
     <h1 class="color-primary">My Accounts</h1>
 
-    <div *ngIf="primaryAccount() as primaryAccount" class="card primary-account margin-bottom" style="background: white; width: 50%;">
+    <button (click)="promptNewAccount()">
+        + Create a new account
+    </button>
+
+    <div *ngIf="showNewAccountWindow" class="card" style="margin: 12px 0; width: 50%;">
+        <form (ngSubmit)="createAccount()" #accountForm="ngForm" class="card-body flex" style="flex-direction: column; gap: 12px;">
+            <div class="flex" style="justify-content: space-between; align-items: start;">
+                <label>
+                    <span>Name:</span>
+                    <input type="text" name="name" [(ngModel)]="newAccount.name" required />
+                </label>
+                <button type="button" style="color: red; width: 32px; height: 32px; background: none!important;" (click)="closeNewAccountWindow()">X</button>
+            </div>
+
+            <label>
+                <span>Currency:</span>
+                <select name="currency" [(ngModel)]="newAccount.currency" required>
+                    <option value="" disabled>Select currency</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="VND">VND</option>
+                    <option value="SEK">SEK</option>
+                </select>
+            </label>
+
+            <button type="submit" style="height: 52px; margin: 12px 0;" [disabled]="accountForm.invalid">Create</button>
+        </form>
+    </div>
+
+    <div *ngIf="primaryAccount() as primaryAccount" class="card primary-account margin-top"
+        style="background: white; width: 50%;">
         <div class="card-header">
             <h2 class="account-title">{{ primaryAccount.name }}</h2>
             <p class="currency"> {{ primaryAccount.currency }} </p>
@@ -16,7 +47,7 @@
         </div>
     </div>
 
-    <div *ngFor="let account of otherAccounts()" class="accounts-container">
+    <div *ngFor="let account of otherAccounts()" class="accounts-container margin-top">
         <div class="card">
             <div class="card-header">
                 <h2 class="account-title"> {{ account.name }} </h2>

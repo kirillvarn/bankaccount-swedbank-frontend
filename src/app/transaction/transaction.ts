@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { BackButtonDirective } from '../directives/back-button.directive';
+import { PdfService } from '../services/pdf.service';
 
 @Component({
   selector: 'app-transaction',
@@ -13,7 +14,14 @@ import { BackButtonDirective } from '../directives/back-button.directive';
 export class Transaction {
   transactionService = inject(TransactionService);
   transactionId = inject(ActivatedRoute).snapshot.paramMap.get('id')!;
+  pdfService = inject(PdfService);
 
   transaction$ = this.transactionService.getTransaction(this.transactionId);
   transaction = toSignal(this.transaction$);
+
+  generateReport() {
+    this.transaction$.subscribe((transaction) => {
+      this.pdfService.generatePDF("Transaction overview", [transaction]);
+    });
+  }
 }
